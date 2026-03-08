@@ -46,16 +46,21 @@ def Main():
     prompt = "Briefly describe an interesting fact about technology in less than 100 words."
     count = 0
     while True:
-        response = client.chat.completions.create(
+        count += 1
+        print(f"Response {count}: ", end="", flush=True)
+        stream = client.chat.completions.create(
             model=args.model,
             messages=[
                 {"role": "system", "content": "You are a helpful assistant."},
                 {"role": "user", "content": prompt}
             ],
-            max_tokens=150
+            max_tokens=150,
+            stream=True,
         )
-        count += 1
-        print(f"Response {count}: {response.choices[0].message.content}")
+        for chunk in stream:
+            if chunk.choices and chunk.choices[0].delta.content:
+                print(chunk.choices[0].delta.content, end="", flush=True)
+        print()
         print("--------------------------------")
         timeList = [60, 120, 180, 240, 300, 360, 420, 480, 540, 600]
         randomTime = random.choice(timeList)
