@@ -5,7 +5,7 @@ A small bot that periodically sends chat completion requests to a Nutanix AI (or
 ## Install
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/ryandotclair/chatty.git
 cd chatty
 pip install -r requirements.txt
 ```
@@ -13,7 +13,7 @@ pip install -r requirements.txt
 Or install dependencies in a virtual environment:
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/ryandotclair/chatty.git
 cd chatty
 python -m venv .venv
 source .venv/bin/activate   # On Windows: .venv\Scripts\activate
