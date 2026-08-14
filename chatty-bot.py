@@ -24,7 +24,6 @@ def TestEndpoint(client, modelName):
 
 def Main():
     args = ParseArgs()
-
     client = OpenAI(base_url=args.url, api_key=args.token)
     try:
         TestEndpoint(client, args.model)
