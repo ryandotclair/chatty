@@ -11,6 +11,7 @@ def ParseArgs():
     parser.add_argument("--url", required=True, help="Base URL (e.g. https://nai.ntnxdemos.com/enterpriseai/v1/)")
     parser.add_argument("--model", required=True, help="Model name (e.g. llama-instruct-rcc)")
     parser.add_argument("--token", required=True, help="API token for the endpoint")
+    parser.add_argument("--sleep", help="Sleep in seconds or minutes")
     return parser.parse_args()
 
 def TestEndpoint(client, modelName):
@@ -62,9 +63,14 @@ def Main():
                 print(chunk.choices[0].delta.content, end="", flush=True)
         print()
         print("--------------------------------")
-        timeList = [60, 120, 180, 240, 300, 360, 420, 480, 540, 600]
-        randomTime = random.choice(timeList)
-        print(f"Sleeping for {randomTime/60} minutes")
+        if args.sleep == "seconds":
+            timeList = list(range(5, 61))
+            randomTime = random.choice(timeList)
+            print(f"Sleeping for {randomTime} seconds")
+        else:
+            timeList = [60, 120, 180, 240, 300, 360, 420, 480, 540, 600]
+            randomTime = random.choice(timeList)
+            print(f"Sleeping for {randomTime/60} minutes")
         time.sleep(randomTime)
 
 
